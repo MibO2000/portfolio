@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Min Satt Aung — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#0B1D26;
+    --navy-mid:#152C38;
+    --navy-line: rgba(232,236,239,0.12);
+    --steel:#5E93A3;
+    --orange:#CE5023;
+    --orange-dark:#9E3C19;
+    --paper:#F1ECE0;
+    --paper-dim:#E7E0CF;
+    --ink:#161F23;
+    --ink-soft:#4A565C;
+    --yellow:#E3AE45;
+    --radius: 4px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  h1,h2,h3{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    margin:0;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--navy-deep);
+    border-bottom:1px solid var(--navy-line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .nav-id{
+    color:var(--paper);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+  }
+  .nav-id b{color:var(--yellow);}
+  .nav-links{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    color:var(--paper-dim);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    padding-bottom:3px;
+    transition:border-color .15s, color .15s;
+  }
+  .nav-links a:hover{color:var(--yellow); border-color:var(--yellow);}
+  .nav-links{display:flex;}
+  @media (max-width:640px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 26px),
+      linear-gradient(180deg, var(--navy-deep), var(--navy-mid));
+    color:var(--paper);
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  header.hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:10px;
+    background:repeating-linear-gradient(90deg, var(--yellow) 0 26px, var(--navy-deep) 26px 52px);
+    opacity:0.85;
+  }
+  .manifest-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--yellow);
+    border:1px solid rgba(227,174,69,0.5);
+    padding:5px 12px;
+    border-radius:2px;
+    margin-bottom:22px;
+  }
+  .manifest-tag::before{content:"◆";}
+  .hero h1{
+    font-size:clamp(42px, 8vw, 84px);
+    color:var(--paper);
+    line-height:0.98;
+    margin-bottom:14px;
+  }
+  .hero h1 span{
+    display:block;
+    color:transparent;
+    -webkit-text-stroke: 1.5px var(--paper);
+    font-size:0.5em;
+    letter-spacing:0.05em;
+    margin-top:10px;
+  }
+  .hero .role{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--steel);
+    font-size:15px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:26px;
+  }
+  .hero p.summary{
+    max-width:600px;
+    color:var(--paper-dim);
+    font-size:16.5px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:22px;
+    margin-top:34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--paper-dim);
+  }
+  .hero-meta span{display:flex; align-items:center; gap:7px;}
+  .hero-meta b{color:var(--paper);}
+  .dot{width:6px; height:6px; background:var(--orange); border-radius:50%; display:inline-block;}
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{padding:64px 0;}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:36px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:12px;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--orange);
+    font-size:13px;
+  }
+  .section-head h2{font-size:28px;}
+
+  /* ---------- CONTAINER STACK (EXPERIENCE) ---------- */
+  .stack{
+    position:relative;
+    display:flex; flex-direction:column; gap:30px;
+  }
+  .stack::before{
+    content:"";
+    position:absolute; left:34px; top:0; bottom:0;
+    width:2px;
+    background:repeating-linear-gradient(180deg, var(--ink) 0 6px, transparent 6px 12px);
+    opacity:0.35;
+  }
+  @media (max-width:640px){ .stack::before{ left:16px; } }
+
+  .container-card{
+    position:relative;
+    margin-left:70px;
+    background:var(--orange);
+    color:var(--paper);
+    border-radius:var(--radius);
+    box-shadow: 0 10px 0 rgba(0,0,0,0.08), 0 18px 30px rgba(11,29,38,0.18);
+    overflow:hidden;
+  }
+  @media (max-width:640px){ .container-card{ margin-left:38px; } }
+  .container-card.alt{background:var(--navy-mid);}
+  .container-card::before{
+    /* corrugation */
+    content:"";
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(90deg, rgba(0,0,0,0.10) 0 3px, transparent 3px 14px);
+    pointer-events:none;
+  }
+  .container-node{
+    position:absolute; left:-56px; top:26px;
+    width:14px; height:14px; border-radius:50%;
+    background:var(--paper); border:3px solid var(--orange);
+  }
+  @media (max-width:640px){ .container-node{ left:-38px; width:12px; height:12px;} }
+  .container-card.alt .container-node{border-color:var(--navy-mid);}
+
+  .container-inner{
+    position:relative;
+    padding:26px 28px 24px;
+  }
+  .rivet{
+    position:absolute; width:7px; height:7px; border-radius:50%;
+    background:rgba(0,0,0,0.22);
+  }
+  .rivet.tl{top:10px; left:10px;} .rivet.tr{top:10px; right:10px;}
+  .rivet.bl{bottom:10px; left:10px;} .rivet.br{bottom:10px; right:10px;}
+
+  .plate{
+    display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start;
+    gap:10px; margin-bottom:14px;
+    border-bottom:1px dashed rgba(241,236,224,0.4);
+    padding-bottom:14px;
+  }
+  .plate h3{font-size:22px; margin-bottom:4px;}
+  .plate .co{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
+    opacity:0.85;
+  }
+  .plate .dates{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; text-transform:uppercase; letter-spacing:0.08em;
+    background:rgba(11,29,38,0.28);
+    padding:5px 10px; border-radius:2px; white-space:nowrap;
+  }
+  .container-card ul{
+    margin:0; padding-left:18px;
+  }
+  .container-card li{margin-bottom:8px; font-size:14.5px;}
+  .container-card li::marker{color:rgba(241,236,224,0.6);}
+
+  .contents-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    opacity:0.75; margin:16px 0 8px;
+  }
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tags span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    padding:4px 9px;
+    border:1px solid rgba(241,236,224,0.45);
+    border-radius:2px;
+  }
+
+  /* ---------- SKILLS AS CARGO TAGS ---------- */
+  .cargo-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px;}
+  .cargo-group{
+    background:var(--paper-dim);
+    border:1px solid rgba(22,31,35,0.12);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+  }
+  .cargo-group h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--orange-dark); margin-bottom:12px;
+  }
+  .cargo-group .tags span{
+    border-color:rgba(22,31,35,0.2);
+    color:var(--ink);
+    background:var(--paper);
+  }
+
+  /* ---------- EDUCATION / CERTS AS STAMPS ---------- */
+  .stamps{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;}
+  .stamp-card{
+    border:2px solid var(--ink);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    position:relative;
+    background:var(--paper);
+  }
+  .stamp-card::before{
+    content: attr(data-stamp);
+    position:absolute; top:14px; right:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--steel);
+    border:1px solid var(--steel);
+    padding:3px 7px; border-radius:2px;
+    transform:rotate(6deg);
+  }
+  .stamp-card h4{font-size:17px; margin-bottom:4px; padding-right:70px;}
+  .stamp-card .org{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; color:var(--ink-soft); margin-bottom:4px;
+  }
+  .stamp-card .when{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; color:var(--steel);
+  }
+
+  .cert-list{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:10px 20px; margin-top:8px;
+  }
+  .cert-list div{
+    font-size:13.5px; padding:8px 0; border-bottom:1px solid rgba(22,31,35,0.1);
+    display:flex; justify-content:space-between; gap:10px;
+  }
+  .cert-list .when{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--steel); white-space:nowrap;}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+  .proj{
+    background:var(--paper); border:1px solid rgba(22,31,35,0.14); border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .proj h4{font-size:15px; margin-bottom:6px;}
+  .proj .dur{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--steel); margin-bottom:8px;}
+  .proj .tags span{font-size:10.5px; border-color:rgba(22,31,35,0.18); background:var(--paper-dim);}
+
+  /* ---------- FOOTER / DOCK ---------- */
+  footer{
+    background:var(--navy-deep); color:var(--paper);
+    padding:56px 0 40px;
+    position:relative;
+  }
+  footer::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:10px;
+    background:repeating-linear-gradient(90deg, var(--yellow) 0 26px, var(--navy-deep) 26px 52px);
+    opacity:0.85;
+  }
+  footer h2{color:var(--paper); font-size:30px; margin-bottom:14px;}
+  footer p{color:var(--paper-dim); max-width:480px; margin-bottom:26px;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:16px;}
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.05em;
+    text-decoration:none; color:var(--paper);
+    border:1px solid rgba(241,236,224,0.35);
+    padding:11px 18px; border-radius:2px;
+    transition:border-color .15s, background .15s;
+  }
+  .contact-btn:hover{border-color:var(--yellow); background:rgba(227,174,69,0.08);}
+  .contact-btn b{color:var(--yellow);}
+  .footer-note{
+    margin-top:40px; padding-top:20px; border-top:1px solid var(--navy-line);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:rgba(241,236,224,0.4);
+  }
+
+  @media (max-width:640px){
+    .section{padding:48px 0;}
+    .plate{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-id">MSA<b>//</b>MANIFEST</div>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Cargo</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="manifest-tag">Manifest ID · MSA‑2026</div>
+    <h1>Min Satt Aung<span>Senior Software Engineer</span></h1>
+    <div class="role">Backend Systems · Java / Spring Boot · Container Orchestration</div>
+    <p class="summary">
+      I build backend systems the way a port runs a terminal: everything labelled,
+      everything containerized, nothing left to guesswork. Ten-plus containerized
+      services in production, API gateways that hold up under real telecom traffic,
+      and a habit of drawing the sequence diagram before writing the first line of code.
+    </p>
+    <div class="hero-meta">
+      <span class="dot"></span>
+      <span><b>Based:</b>&nbsp;Yangon, Myanmar</span>
+      <span><b>Currently:</b>&nbsp;Singapore engagement</span>
+      <span><b>Languages:</b>&nbsp;Burmese, English</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="section" id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="idx">01</span>
+        <h2>Cargo Log — Experience</h2>
+      </div>
+
+      <div class="stack">
+
+        <div class="container-card">
+          <div class="container-node"></div>
+          <div class="container-inner">
+            <span class="rivet tl"></span><span class="rivet tr"></span>
+            <span class="rivet bl"></span><span class="rivet br"></span>
+            <div class="plate">
+              <div>
+                <h3>Team Lead</h3>
+                <div class="co">Jurong Port, Singapore — outsourced via Codigo (Mobile App Development)</div>
+              </div>
+              <div class="dates">Sep 2025 — Present</div>
+            </div>
+            <ul>
+              <li>Leading a cross-functional engineering team delivering mobile and backend systems for Jurong Port under Codigo's outsourcing engagement.</li>
+              <li>Owning technical direction and delivery timelines, translating port operational requirements into engineering plans.</li>
+              <li>Reviewing architecture and code across the team, keeping API and service design consistent with prior Java/Spring Boot and containerized-service practice.</li>
+              <li>Coordinating with stakeholders on both the Codigo and Jurong Port sides to keep scope, priorities, and releases aligned.</li>
+            </ul>
+            <div class="contents-label">Contents</div>
+            <div class="tags">
+              <span>Team Leadership</span><span>Java</span><span>Spring Boot</span><span>Mobile Backend</span><span>Stakeholder Mgmt</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-card alt">
+          <div class="container-node"></div>
+          <div class="container-inner">
+            <span class="rivet tl"></span><span class="rivet tr"></span>
+            <span class="rivet bl"></span><span class="rivet br"></span>
+            <div class="plate">
+              <div>
+                <h3>Senior Software Engineer</h3>
+                <div class="co">Linux Lab Company</div>
+              </div>
+              <div class="dates">Nov 2023 — Sep 2025</div>
+            </div>
+            <ul>
+              <li>Built an API Gateway handling service-to-service communication for MPT (Myanmar Posts and Telecommunications).</li>
+              <li>Led design and architecture across Linux Lab and MPT projects — database design, system flow, and structuring end to end.</li>
+              <li>Produced sequence diagrams, flowcharts, and use-case diagrams to keep stakeholders aligned on project direction.</li>
+              <li>Built RESTful APIs connecting web front ends to backend services for reliable, efficient data exchange.</li>
+              <li>Wrote Containerfiles to package the Java application for Podman, and ran Kafka, Keycloak, MongoDB, MySQL, and PostgreSQL as Podman-managed services supporting it.</li>
+            </ul>
+            <div class="contents-label">Contents</div>
+            <div class="tags">
+              <span>Java</span><span>Spring Boot</span><span>Podman</span><span>Kafka</span><span>Keycloak</span><span>MongoDB</span><span>PostgreSQL</span><span>MySQL</span>
+            </div>
+            <div class="contents-label">Notable Projects</div>
+            <div class="tags">
+              <span>Reservation Management System — Apr 2024 – Present</span>
+              <span>Restaurant Booking System — Nov 2024 – Dec 2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-card">
+          <div class="container-node"></div>
+          <div class="container-inner">
+            <span class="rivet tl"></span><span class="rivet tr"></span>
+            <span class="rivet bl"></span><span class="rivet br"></span>
+            <div class="plate">
+              <div>
+                <h3>Backend Developer</h3>
+                <div class="co">Telecom International, Myanmar</div>
+              </div>
+              <div class="dates">Jul 2022 — Nov 2023</div>
+            </div>
+            <ul>
+              <li>Led design and architecture across multiple projects — structuring, database design, and system flow.</li>
+              <li>Produced sequence diagrams, flowcharts, and use-case diagrams to guide development and stakeholder communication.</li>
+              <li>Built RESTful APIs connecting web front ends to backend services.</li>
+              <li>Maintained and deployed services on CentOS 7 servers, keeping systems reliable under production load.</li>
+              <li>Ran unit, integration, and system testing to validate functionality and stability before release.</li>
+            </ul>
+            <div class="contents-label">Contents</div>
+            <div class="tags">
+              <span>Java</span><span>Oracle DB</span><span>Kafka</span><span>Keycloak</span><span>Redis</span><span>CentOS 7</span><span>SOAP UI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section-head" style="margin-top:56px;">
+        <span class="idx">01a</span>
+        <h2>Prior Cargo — Notable Projects</h2>
+      </div>
+      <div class="projects">
+        <div class="proj">
+          <h4>M2M Money Sharing Project</h4>
+          <div class="dur">2 months</div>
+          <div class="tags"><span>Java</span><span>Keycloak</span><span>Kafka</span><span>Redis</span><span>Oracle</span></div>
+        </div>
+        <div class="proj">
+          <h4>Report Portal</h4>
+          <div class="dur">1 month</div>
+          <div class="tags"><span>Java</span><span>Oracle</span><span>Kafka</span><span>Keycloak</span></div>
+        </div>
+        <div class="proj">
+          <h4>FTTH Bonus Sharing Portal</h4>
+          <div class="dur">1 month</div>
+          <div class="tags"><span>Java</span><span>Oracle</span><span>Kafka</span></div>
+        </div>
+        <div class="proj">
+          <h4>Customer Care Portal — Massive Error Report</h4>
+          <div class="dur">2 weeks</div>
+          <div class="tags"><span>Java</span></div>
+        </div>
+        <div class="proj">
+          <h4>VoLTE Project with SOAP UI</h4>
+          <div class="dur">2 weeks</div>
+          <div class="tags"><span>Java</span><span>SOAP</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills" style="background:var(--paper-dim);">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="idx">02</span>
+        <h2>Cargo Manifest — Skills</h2>
+      </div>
+      <div class="cargo-groups">
+        <div class="cargo-group">
+          <h4>Languages &amp; Frameworks</h4>
+          <div class="tags"><span>Java</span><span>JavaScript</span><span>Spring Boot</span><span>Angular</span></div>
+        </div>
+        <div class="cargo-group">
+          <h4>Containers &amp; Infra</h4>
+          <div class="tags"><span>Docker</span><span>Podman</span><span>Linux</span><span>CentOS 7</span></div>
+        </div>
+        <div class="cargo-group">
+          <h4>Data &amp; Messaging</h4>
+          <div class="tags"><span>MySQL</span><span>PostgreSQL</span><span>Oracle DB</span><span>MongoDB</span><span>Kafka</span><span>Redis</span></div>
+        </div>
+        <div class="cargo-group">
+          <h4>Identity &amp; Tooling</h4>
+          <div class="tags"><span>Keycloak</span><span>Git</span></div>
+        </div>
+        <div class="cargo-group">
+          <h4>Practice</h4>
+          <div class="tags"><span>Problem-Solving</span><span>Team Leadership</span><span>Communication</span><span>System Design</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="idx">03</span>
+        <h2>Inspection Record — Education</h2>
+      </div>
+      <div class="stamps">
+        <div class="stamp-card" data-stamp="Verified">
+          <h4>B.Sc Computing (Information Systems)</h4>
+          <div class="org">University of Greenwich</div>
+        </div>
+        <div class="stamp-card" data-stamp="Verified">
+          <h4>Level 5 Diploma in Computing</h4>
+          <div class="org">NCC Education</div>
+        </div>
+        <div class="stamp-card" data-stamp="Verified">
+          <h4>Level 4 Diploma in Computing</h4>
+          <div class="org">NCC Education</div>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top:48px;">
+        <span class="idx">03a</span>
+        <h2>Certificates &amp; Courses</h2>
+      </div>
+      <div class="cert-list">
+        <div><span>Development I: Introduction to Containers with Podman (DO188)</span><span class="when mono">Red Hat OpenShift · Dec 2023–Mar 2024</span></div>
+        <div><span>CS50's Introduction to Computer Science</span><span class="when mono">edX · Feb–Jul 2022</span></div>
+        <div><span>Diploma in English (CEFR C1)</span><span class="when mono">Wall Street English · Dec 2021–Jul 2022</span></div>
+        <div><span>The Complete 2024 Web Development Bootcamp</span><span class="when mono">Udemy · Mar 2025–Present</span></div>
+        <div><span>SQL Intermediate Certificate</span><span class="when mono">HackerRank · Jun 2022</span></div>
+        <div><span>Java Basic Certificate</span><span class="when mono">HackerRank · Jun 2022</span></div>
+        <div><span>Java Functional Programming</span><span class="when mono">Amigoscode · Apr 2022</span></div>
+        <div><span>Getting Started with Spring Boot</span><span class="when mono">Amigoscode · Apr 2022</span></div>
+        <div><span>Programming Foundations with JavaScript, HTML and CSS</span><span class="when mono">Coursera · Mar 2022</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="manifest-tag">Ready to load</div>
+    <h2>Let's ship something.</h2>
+    <p>Open to backend, platform, and team-lead engagements — especially where containers, APIs, and clear system design meet.</p>
+    <div class="contact-row">
+      <a class="contact-btn" href="mailto:minsattaung.cs@gmail.com"><b>@</b> minsattaung.cs@gmail.com</a>
+      <a class="contact-btn" href="tel:+959763940667"><b>#</b> +959 763 940 667</a>
+      <a class="contact-btn" href="https://github.com/mibo2000" target="_blank" rel="noopener"><b>&gt;</b> github.com/mibo2000</a>
+      <a class="contact-btn"><b>@</b> Yangon, Myanmar</a>
+    </div>
+    <div class="footer-note">MANIFEST CLOSED · ALL CONTAINERS ACCOUNTED FOR · MSA-2026</div>
+  </div>
+</footer>
+
+</body>
+</html>
